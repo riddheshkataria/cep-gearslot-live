@@ -505,7 +505,7 @@ function App() {
 
 const handleLogin = async (email: string, password: string) => {
   try {
-    const response = await fetch(${import.meta.env.VITE_API_URL}/api/auth/login, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',
@@ -532,7 +532,7 @@ const handleLogin = async (email: string, password: string) => {
   const handleLogout = async () => {
     try {
       // Tell the backend to clear the cookie
-      await fetch(${import.meta.env.VITE_API_URL}/api/auth/logout, {
+      await fetch(`${import.meta.env.VITE_API_URL}/api/auth/logout`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -551,7 +551,7 @@ const handleLogin = async (email: string, password: string) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch(${import.meta.env.VITE_API_URL}/api/auth, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -579,7 +579,7 @@ useEffect(() => {
         try {
           const formattedDate = formatISO(selectedDate, { representation: 'date' });
           
-          const response = await fetch(${import.meta.env.VITE_API_URL}/api/slots?date=${formattedDate}, {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/api/slots?date=${formattedDate}`, {
             credentials: 'include',
           });
           
@@ -601,7 +601,7 @@ useEffect(() => {
 
       const fetchTrainees = async () => {
         try {
-          const response = await fetch(${import.meta.env.VITE_API_URL}/api/trainees, {
+          const response = await fetch(`${import.meta.env.VITE_API_URL}/api/trainees`, {
             credentials: 'include',
           });
           if (response.ok) {
@@ -628,7 +628,7 @@ useEffect(() => {
     try {
       const date = formatISO(selectedDate, { representation: 'date' }); 
       
-      const response = await fetch(${import.meta.env.VITE_API_URL}/api/slots, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/slots`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -647,7 +647,7 @@ useEffect(() => {
         setSlotsUpdated(prev => prev + 1); 
       } else {
         const data = await response.json();
-        alert(Failed to create slot: ${data.msg});
+        alert(`Failed to create slot: ${data.msg}`);
       }
     } catch (error) {
       console.error('Error creating slot:', error);
@@ -656,7 +656,7 @@ useEffect(() => {
   // --- ADD THIS NEW FUNCTION ---
   const handleAddTrainee = async (slotId: string, traineeId: string) => {
     try {
-      const response = await fetch(${import.meta.env.VITE_API_URL}/api/slots/${slotId}/trainees, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/slots/${slotId}/trainees`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -680,7 +680,7 @@ useEffect(() => {
         );
       } else {
         const data = await response.json();
-        alert(Failed to add trainee: ${data.msg});
+        alert(`Failed to add trainee: ${data.msg}`);
       }
     } catch (error) {
       console.error('Error adding trainee to slot:', error);
@@ -694,7 +694,7 @@ useEffect(() => {
     }
 
     try {
-      const response = await fetch(${import.meta.env.VITE_API_URL}/api/slots/${slotId}/trainees/${traineeId}, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/slots/${slotId}/trainees/${traineeId}`, {
         method: 'DELETE',
         credentials: 'include',
       });
@@ -725,7 +725,7 @@ useEffect(() => {
     // This is the popup you asked for (using window.confirm)
     if (window.confirm('Are you sure you want to remove this slot?')) {
       try {
-        const response = await fetch(${import.meta.env.VITE_API_URL}/api/slots/${slotId}, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/slots/${slotId}`, {
           method: 'DELETE',
         });
 
@@ -746,7 +746,7 @@ useEffect(() => {
 // --- ADD THIS FUNCTION ---
 const handleAddNewTrainee = async (newTrainee: { name: string, phone: string, email: string }) => {
   try {
-    const response = await fetch(${import.meta.env.VITE_API_URL}/api/trainees, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/trainees`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -761,7 +761,7 @@ const handleAddNewTrainee = async (newTrainee: { name: string, phone: string, em
       setAllTrainees(prev => [...prev, { ...addedTrainee, id: addedTrainee._id }]);
     } else {
       const data = await response.json();
-      alert(Failed to add trainee: ${data.msg});
+      alert(`Failed to add trainee: ${data.msg}`);
     }
   } catch (error) {
     console.error('Error adding trainee:', error);
@@ -771,7 +771,7 @@ const handleAddNewTrainee = async (newTrainee: { name: string, phone: string, em
 // --- AND ADD THIS FUNCTION ---
 const handleDeleteTrainee = async (traineeId: string) => {
   try {
-    const response = await fetch(${import.meta.env.VITE_API_URL}/api/trainees/${traineeId}, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/trainees/${traineeId}`, {
       method: 'DELETE',
       credentials: 'include', // Send cookies
     });
