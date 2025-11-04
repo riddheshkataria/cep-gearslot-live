@@ -20,7 +20,7 @@ connectDB();
 // This is the easiest way to solve preflight request errors.
 // It MUST be placed before the API routes.
 app.use(cors({
-  origin: ['http://localhost:5173','https://gearslot-frontend.vercel.app/'], // Must be the exact origin
+  origin: ['http://localhost:5173','https://gearslot-frontend.vercel.app'], // Must be the exact origin
   credentials: true               // This allows cookies
 }));
 
